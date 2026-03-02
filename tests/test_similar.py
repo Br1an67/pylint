@@ -275,8 +275,8 @@ class TestSymilarCodeChecker:
         """
         path = join(DATA, "2368")
         reporter = GenericTestReporter()
-        # Pass files explicitly with the unrelated module last, so that
-        # current_name points to xmlgen when close() fires.
+        # Pass files explicitly with the unrelated module last, so that current_name
+        # points to a file without duplication when close() fires.
         Run(
             [
                 join(path, "databaselib.py"),
@@ -295,7 +295,7 @@ class TestSymilarCodeChecker:
             assert msg.symbol == "duplicate-code"
             # The message text contains "=={module_name}:[start:end]" for each
             # involved module. The message's own .module must be one of them,
-            # not the unrelated xmlgen module.
+            # but not the unrelated module.
             involved = re.findall(r"==(\S+?):\[", msg.msg)
             assert msg.module in involved, (
                 f"R0801 attributed to {msg.module!r} which is not in "
